@@ -1,0 +1,636 @@
+---
+title: "R and Rmarkdown For Business Intelligence"
+author: "Written By Nick Stambaugh"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: darkly
+    toc: true
+    toc_float: true
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+```
+
+```{r echo=F}
+knitr::include_graphics("book.png")
+```
+
+\`\`\`
+
+## Introduction
+
+In this guide, we'll explore how R and Rmarkdown can be used for business intelligence. We'll start by introducing R and Rmarkdown, and then move on to some of the core concepts and techniques you need to know to get started. This is a beginner guide meant to help you get your feet wet in utilizing R for business intelligence.
+
+Thank you for reading.
+
+# Getting Started
+
+## Installing R and RStudio
+
+Before we start, we need to install R and RStudio. In this section, we'll provide instructions on how to install both of these tools. This will only take a few minutes.
+
+
+### Installing R
+
+R is a free, open-source programming language that is widely used for statistical analysis and data visualization. To install R, follow these steps:
+
+1.  Go to the [R download page](https://cran.r-project.org/) and choose a mirror site.
+2.  Select the appropriate version of R for your operating system.
+3.  Download and run the installer.
+4.  Follow the installation instructions.
+
+### Installing RStudio
+
+RStudio is a powerful, user-friendly integrated development environment (IDE) for R. It provides a convenient interface for writing, running, and debugging R code, and includes many useful features for data analysis and visualization. To install RStudio, follow these steps:
+
+1.  Go to the [RStudio download page](https://posit.co/download/rstudio-desktop/) and choose the appropriate version of RStudio for your operating system.
+2.  Download and run the installer.
+3.  Follow the installation instructions.
+
+Once you have installed R and RStudio, you're ready to start using R Markdown for business intelligence!
+
+## Introduction to R
+
+R is a powerful programming language for statistical computing and graphics. It provides a wide range of functions and packages that allow you to analyze and visualize data, and create reports and presentations. In this section, we'll provide an overview of some of the key features of R, including data types, data structures, and functions.
+
+The 4 core concepts of R are **data structures, functions, libraries and data types** as they are the backbone of R, allowing users to efficiently and effectively manipulate and analyze data.
+
+-   Data types in R have several ways to represent different types of values (i.e. numbers, text, etc.)
+
+-   Data structures in R provide a way to store and organize data.
+
+-   Functions in R enable users to perform complex operations on data, such as data cleaning, filtering, and visualization. This is both built-in and user-defined.
+
+-   Libraries are pre-built packages that allow the user to expand the functionality of R.
+
+Understanding these concepts is essential to unlocking the full potential of R for business intelligence tasks. By leveraging the various data types, data structures, and functions in R, users can extract insights from their data and make data-driven decisions with confidence.
+
+### Data Types
+
+R has several data types that are used to represent different types of values, including:
+
+-   Numeric: used to represent real numbers, e.g., 3.14, -2.5, etc.
+
+-   Integer: used to represent whole numbers, e.g., 1, 2, -3, etc.
+
+-   Logical: used to represent TRUE or FALSE values.
+
+-   Character: used to represent text strings, e.g., "hello", "world", etc.
+
+-   Factor: used to represent categorical variables, e.g., "red", "green", "blue", etc.
+
+### Data Structure
+
+R has several data structures that are used to store and manipulate data, including:
+
+-   Vectors: used to store a sequence of values of the same data type, e.g., c(1, 2, 3) or c("red", "green", "blue").
+
+-   Matrices: used to store a two-dimensional table of values, e.g., matrix(c(1, 2, 3, 4), nrow = 2, ncol = 2).
+
+-   Data frames: used to store a table of data with different data types, e.g., data.frame(x = c(1, 2, 3), y = c("red", "green", "blue")).
+
+-   Lists: used to store a collection of objects, including other lists and data structures.
+
+### Functions
+
+R has a large number of built-in functions that allow you to perform a wide range of operations on data, including:
+
+-   Mathematical functions: e.g., mean(), sum(), max(), min(), etc.
+
+-   Statistical functions: e.g., t.test(), cor(), lm(), etc.
+
+-   Data manipulation functions: e.g., subset(), merge(), rbind(), cbind(), etc.
+
+-   Data visualization functions: e.g., plot(), ggplot2(), lattice(), etc.
+
+You can also create your own functions in R using the function() keyword. This allows you to customize the behavior of R and perform more complex operations on your data.
+
+### Libraries
+
+R has a wide variety of libraries you can install to expand the functionality of R greatly.
+
+Some popular libaries are:
+
+-   dplyr
+-   ggplot2
+-   tidyr
+-   caret
+-   data.table
+-   reshape2
+-   plyr
+-   stringr
+-   lubridate
+-   magrittr
+-   gridExtra
+-   shiny
+-   knitr
+-   rmarkdown
+-   leaflet
+-   leaflet.extras
+-   plotly
+-   RColorBrewer
+-   scales
+
+To install the `ggplot2` package, run `install.packages("ggplot2")`.
+
+You can also install multiple packages at once by separating their names with a comma, like this: To install the multiple packages, run `install.packages(c("ggplot2","knitr","tidyr"))`.
+
+In the following sections, we'll explore these features in more detail and show you how to use R and R Markdown for business intelligence tasks.
+
+## Introduction to Rmarkdown
+
+Rmarkdown is a powerful tool for creating dynamic documents that combine code, text, and visualizations. With Rmarkdown, you can easily create reports, presentations, and dashboards with the ability to run code and include dynamic graphics, such as this document you're reading!
+
+The basic syntax of Rmarkdown is based on markdown, which is a lightweight markup language with plain text formatting syntax. Markdown allows you to quickly and easily format text using simple symbols, such as asterisks, hyphens, and hashtags.
+
+Starting an Rmarkdown file in RStudio is simple.
+
+-   First, open RStudio and click on the "File" menu at the top left of the screen. Next, hover over "New File" and select "R Markdown" from the drop-down menu. This will open the "New R Markdown" dialog box, where you can select the type of document you want to create and customize its settings.
+
+-   In the "New R Markdown" dialog box, you can choose the output format for your document, such as HTML, PDF, or Word, and customize options such as the title, author, and date. You can also select a document template, which provides pre-built formatting and layout for your document.
+
+-   Once you've made your selections, click the "OK" button, and RStudio will create a new Rmarkdown file with the selected options. From there, you can start adding text, code chunks, and other elements to your document.
+
+In addition to markdown, Rmarkdown supports inline R code chunks, which allow you to include R code within your document. These chunks can be used to perform calculations, generate plots, and load data. Overall, Rmarkdown provides a flexible and powerful way to create reproducible and interactive reports and presentations.
+
+# Data Analysis Core Concepts
+
+In business intelligence, data manipulation is a key part of the process. In this section, we'll cover how to manipulate data using R.
+
+## Importing Data
+
+We'll cover how to import data into R from various sources, including spreadsheets and databases.
+
+Importing data is a critical step in any data analysis project. RStudio provides several built-in functions for importing data from various file formats and data sources.
+
+### CSV
+
+To import data from a CSV or text file, you can use the `read.csv()` or `read.table()` functions. These functions read in data as a data frame, which is a common data structure in R. To get a file in the working directory, simply press import data set under the environment tab in the upper right hand tab.
+
+For example, to read in a CSV file named "data.csv" located in the working directory, you can use the following code:
+
+``` {echo="TRUE"}
+df <- read.csv('data.csv')
+```
+
+### Excel
+
+To import data from an Excel file, you can use the readxl package, which provides the `read.excel()` function. This function reads in data as a data frame and supports various options for selecting specific sheets, columns, and ranges of data.
+
+For example, to read in data from the "Sheet1" of an Excel file named "data.xlsx", located in the working directory, you can use the following code:
+
+``` {echo="TRUE"}
+library(readxl)
+data <- read_excel("data.xlsx", sheet = "Sheet1")
+```
+
+### SQL Database
+
+To import data from a database, you can use the DBI and RMySQL packages for MySQL databases or the RODBC package for ODBC-compatible databases. These packages provide functions for connecting to a database and running SQL queries to extract data.
+
+For example, to extract data from a MySQL database, you can use the following code:
+
+``` {echo="TRUE"}
+library(DBI)
+library(RMySQL)
+con <- dbConnect(RMySQL::MySQL(), dbname = "mydatabase", host = "localhost", 
+                 user = "myusername", password = "mypassword")
+data <- dbGetQuery(con, "SELECT * FROM mytable")
+dbDisconnect(con)
+```
+
+## Data Transformation
+
+We'll cover the various data manipulation functions in R, including filtering, grouping, summarizing, and joining data.
+
+In R, data transformation is an essential step in data analysis. It involves modifying or reshaping data to make it easier to work with, or to extract insights from. Here, we will explore some popular functions for data transformation in R.
+
+### Filtering
+
+The dplyr library provides several useful functions for filtering data. The filter() function allows you to select rows of data based on a specific condition.
+
+For example, to filter data to only include rows where the value of column "A" is greater than 10, you could use the following code:
+
+``` {echo="T"}
+library(dplyr)
+
+filtered_data <- filter(data, A > 10)
+```
+
+### Grouping
+
+The group_by() function in dplyr allows you to group data by one or more variables, so that you can apply functions to each group individually.
+
+For example, to group data by the "B" column and calculate the average of column "A" for each group, you could use the following code:
+
+``` {echo="T"}
+grouped_data <- group_by(data, B)
+summarized_data <- summarize(grouped_data, avg_A = mean(A))
+```
+
+### Summarizing
+
+The summarize() function in dplyr allows you to calculate summary statistics for one or more columns of data.
+
+For example, to calculate the average and standard deviation of column "A", you could use the following code:
+
+``` {echo="T"}
+summary_data <- summarize(data, avg_A = mean(A), sd_A = sd(A))
+```
+
+### Joining
+
+The join() function in dplyr allows you to combine two data frames based on a common column.
+
+For example, to join two data frames df1 and df2 based on a common column "id", you could use the following code:
+
+``` {echo="T"}
+joined_data <- join(df1, df2, by = "id")
+```
+
+## Data Visualization
+
+We'll cover how to create data visualizations in R using packages like ggplot2 and plotly.
+
+One of the strengths of R is its ability to create high-quality data visualizations. In this section, we will cover how to create data visualizations in R using popular packages like ggplot2 and plotly.
+
+### ggplot2
+
+ggplot2 is a widely-used package for creating data visualizations in R. It uses a layered grammar of graphics to create complex visualizations from simple building blocks.
+
+To create a basic ggplot2 visualization, you will need to have a data frame with the variables that you want to visualize. Here is an example:
+
+```{r echo=TRUE}
+library(ggplot2)
+
+# Create a sample data frame
+data <- data.frame(
+  x = c(1, 2, 3, 4, 5),
+  y = c(2, 4, 6, 8, 10)
+)
+
+# Create a ggplot2 visualization
+ggplot(data, aes(x = x, y = y)) +
+  geom_point()
+
+```
+
+In this example, we first loaded the ggplot2 package, and then created a sample data frame with two variables (x and y). We then created a ggplot2 visualization by calling the ggplot() function and passing in the data frame and the aes() function, which specifies how the variables should be mapped to the plot aesthetics. Finally, we added a geom_point() layer to create a scatter plot.
+
+ggplot2 has many different types of layers and options for customizing visualizations. Check out the ggplot2 documentation for more information.
+
+### plotly
+
+plotly is another popular package for creating interactive data visualizations in R. It allows you to create interactive plots with zooming, panning, and hover effects. Try it out below!
+
+Here is an example of how to create a plotly visualization:
+
+```{r echo=T, message=FALSE, warning=FALSE}
+library(plotly)
+
+# Create a sample data frame
+data <- data.frame(
+  x = c(1, 2, 3, 4, 5),
+  y = c(2, 4, 6, 8, 10)
+)
+
+# Create a plotly visualization
+plot_ly(data, x = ~x, y = ~y, type = "scatter", mode = "lines+markers")
+
+```
+
+In this example, we first loaded the plotly package, and then created a sample data frame with two variables (x and y). We then created a plotly visualization by calling the plot_ly() function and passing in the data frame and the x and y variables. We also specified that the plot should be a scatter plot with lines and markers.
+
+plotly has many different types of interactive plots and options for customizing visualizations. Check out the plotly documentation for more information.
+
+# Business Intelligence
+
+## Dashboards
+
+Dashboards are a great way to visualize and interact with data in real-time. In this section, we'll cover how to create dashboards in R using the flexdashboard package, which is built on top of shiny, dplyr, and plotly.
+
+First, let's install the necessary packages:
+
+``` {echo="T"}
+install.packages(c("flexdashboard", "shiny", "dplyr", "plotly"))
+```
+
+To create a dashboard, we'll start by creating a new R Markdown document in RStudio and selecting "From Template" and then "Flex Dashboard". This will create a template that we can use as a starting point for our dashboard.
+
+In the template, we'll see a YAML header that defines the title and layout of the dashboard, as well as a set of R chunks that we can use to define the content of the dashboard. We can add additional R chunks and Markdown content as needed to create our dashboard.
+
+Here's an example of a simple dashboard in the form of an Rmarkdown file that shows a scatterplot of car fuel efficiency by horsepower:
+
+``` {echo="T"}
+library(dplyr)
+library(plotly)
+
+# Load the mpg dataset
+data(mpg)
+
+# Group the data by number of cylinders
+mpg_grouped <- mpg %>%
+  group_by(cyl) %>%
+  summarise(avg_hp = mean(hp),
+            avg_mpg = mean(cty))
+
+# Create a scatterplot of mpg vs. hp
+plot <- ggplot(mpg, aes(x = hp, y = cty)) +
+  geom_point()
+
+# Add a trendline to the scatterplot
+plot <- ggplotly(plot + geom_smooth(method = "lm", se = FALSE))
+
+# Create the dashboard
+---
+title: "My Dashboard"
+output: flexdashboard::flex_dashboard
+---
+
+
+# Row
+-------------------------------------
+
+### MPG vs. Horsepower
+
+
+plot
+# Column
+-------------------------------------
+
+### Fuel Efficiency by Cylinder
+
+mpg_grouped %>%
+  plot_ly(x = ~avg_hp, y = ~avg_mpg, type = "scatter", mode = "markers",
+          marker = list(size = 10, color = ~cyl)) %>%
+  layout(xaxis = list(title = "Horsepower"),
+         yaxis = list(title = "City MPG"))
+```
+
+## Dashboards Continued
+
+Here is an example of a dashboard I created using the flexdashboard template:
+
+```{r echo=F}
+knitr::include_graphics("dash.png")
+```
+
+To create this dashboard, we will start with loading the proper libraries:
+
+``` {echo="TRUE"}
+library(flexdashboard)
+library(dplyr)
+library(shiny)
+library(plotly)
+```
+
+Next, we load in the dataset and pick which columns we would like to use for the filter.
+
+``` {echo="T"}
+data <- read.csv("Credit.csv")
+
+Cat.Variables = c("Gender", "Education_Level", "Marital_Status")
+
+num.Variables = c("Customer_Age", "Total_Trans_Ct", "Credit_Limit")
+```
+
+Then we add the filters to the rmarkdown file:
+
+``` {echo="T"}
+selectInput("Cat.Variables", label="Categories", choices = Cat.Variables)
+
+selectInput("num.Variables", label="Numeric Categories", choices = num.Variables)
+```
+
+and finally, we add the visualizations:
+
+### Chart A
+
+``` {echo="T"}
+renderPlotly({
+  plot_ly(data,
+          x = ~data[[input$num.Variables]],
+          color = ~data[[input$Cat.Variables]],
+          colors = "Paired",
+          type = "box") %>%
+    layout(title="",
+           xaxis = list(title="",
+                        zeroline=F))
+})
+```
+
+### Chart B
+
+``` {echo="T"}
+renderPlotly({
+  data %>%
+    count(var = data[[input$Cat.Variables]], name = "count") %>%
+    plot_ly(x=~var, y=~count, type="bar", marker = list(color='#008ae6',
+                                                        line = list(color='#008ae6', width=2)), hoverinfo="x+y") %>%
+    add_text(text = ~paste0(" (", scales::percent(count/sum(count)),")"),
+             textposition="bottom",
+             textfont = list(size = 12, color = "white"),
+             showlegend=F) %>%
+    layout(xaxis= list(title = ""), yaxis= list(title = ""))
+})
+```
+
+### Chart C
+
+``` {echo="T"}
+renderPlotly({
+  plot_ly(x = data[[input$num.Variables]], type = "histogram", marker = list(color='#008ae6', line=list(color="black",
+                                                                                                        width=1)))
+})
+```
+
+In this example, we use the `mpg` dataset from the `ggplot2` package to create a scatterplot of fuel efficiency by horsepower, and a grouped bar chart showing the average fuel efficiency by number of cylinders.
+
+Note that we use the `plotly` package to create interactive plots that can be customized with various hover, click, and selection behaviors. Additionally, we use the `dplyr` package to group and summarize the data before plotting it.
+
+Overall, `flexdashboard` provides a convenient way to create interactive dashboards with R, using a combination of Markdown and R code. With a little bit of practice, you can use it to create custom dashboards that suit your specific data analysis needs.
+
+## Mapping
+
+Mapping is an essential part of business intelligence, as it allows us to visualize and explore data in a geospatial context. In R, there are several packages available for creating interactive maps, including leaflet and ggplot2.
+
+### leaflet
+
+The leaflet package provides an easy-to-use interface for creating interactive maps with a variety of basemaps and overlays.
+
+To get started with leaflet, we'll need to create a dataframe with latitude and longitude information.
+
+```{r echo=T}
+# Create a sample dataframe with latitude and longitude information
+df <- data.frame(
+  lat = c(40.7128, 34.0522, 41.8781),
+  long = c(-74.0060, -118.2437, -87.6298),
+  city = c("New York", "Los Angeles", "Chicago")
+)
+
+```
+
+Now that we have our data, we can create a basic map using the leaflet function:
+
+```{r echo=T, message=FALSE, warning=FALSE}
+library(leaflet)
+
+leaflet(df) %>% 
+  addTiles() %>% 
+  addMarkers()
+
+```
+
+This will create a basic map with markers for each city in our dataframe.
+
+### tmap
+
+The tmap package is another powerful mapping tool in R, providing a range of functionality for creating static and interactive maps. It uses a layered approach to building maps, allowing you to customize every aspect of the visualization.
+
+The World data set in the tmap package provides a simple and commonly used data set that you can use to create a basic map. Here's an example of how to plot this data set:
+
+```{r echo=T, message=FALSE, warning=FALSE}
+library(tmap)
+
+data(World)
+tm_shape(World) +
+  tm_polygons()
+
+```
+
+## Mapping Continued
+
+The best way to plot points on a map is through latitude and longitude columns in a csv/excel file.
+
+To begin, we will load the necessary libraries:
+
+``` {echo="T"}
+library(sf)
+library(ggplot2)
+library(leaflet)
+```
+
+### Spatial Awareness
+
+From there, we will load the file that contains our coordinates and covert the latitude and longitude to a spatial object:
+
+``` {ecoh="T"}
+# Read in building location data
+building_data <- read.csv("building_locations.csv")
+
+# Convert to spatial object
+building_points <- st_as_sf(building_locations, coords = c("Longitude", "Latitude"), crs = 4269)
+```
+
+To get a spatial understanding of our data, without the clutter of a map, we can use ggplot2:
+
+``` {echo="T"}
+ggplot() + 
+  geom_sf(data = building_points) + 
+  theme_bw()
+```
+
+#### Chart 1
+
+```{r echo=F}
+knitr::include_graphics("spatial.png")
+```
+
+### Interactive Map
+
+Next we can create an interactive map, this can be achieved via the following code:
+
+``` {echo="T"}
+# Create leaflet map
+m <- leaflet() %>%
+  
+  # Add tile layer for the base map
+  addTiles() %>%
+  
+  # Add markers for the building locations
+  addCircleMarkers(data = building_locations, 
+                   lat = ~Latitude, 
+                   lng = ~Longitude, 
+                   color = "black", 
+                   radius = 0.5,
+                   popup = building_locations$Name)
+
+
+# Display map, highlight to line 26 and run
+m
+```
+
+#### Chart 2
+
+```{r echo=F}
+knitr::include_graphics("map01.png")
+```
+
+## Reporting and Sharing Results
+
+In this section, we'll cover how to create reports and share results with stakeholders using Rmarkdown, including HTML and PDF output.
+
+1.  First, create an Rmd file in RStudio by clicking on "File" and then "New File" and selecting "R Markdown".
+2.  In the YAML header of your Rmd file, specify the output format as either "html_document" or "pdf_document". You will see the file in your directory and file mapping.
+3.  Write your content in the Rmd file using R code chunks and Markdown syntax.
+4.  Click on the "Knit" button in the RStudio toolbar to generate the output file in the specified format.
+5.  To share your HTML output, simply share the generated .html file with your stakeholders.
+6.  To share your PDF output, install the required LaTeX distribution on your machine (such as TinyTeX), and then specify the output format as "pdf_document" in the YAML header of your Rmd file. Then, click on the "Knit" button to generate a PDF file that you can share.
+
+# Closing
+
+## Best Practices
+
+When using R and Rmarkdown for business intelligence, it's important to keep in mind some best practices for efficiency, reproducibility, and collaboration. Here are a few tips:
+
+1.  *Document your code:* When writing R code, it's important to document it in a way that is clear and easy to follow. This helps others (and yourself) understand what the code is doing and why it's important. In Rmarkdown, you can add comments to your code using the "\#" symbol.
+
+2.  *Organize your files:* Keeping your files organized can help you and your team find what you need quickly. Consider using a consistent file naming convention and organizing your files into directories or folders.
+
+3.  *Version control:* Version control is an essential tool for collaboration and reproducibility. Consider using Git and a platform like GitHub or Bitbucket to manage your code and collaborate with others.
+
+4.  *Use packages:* The R community has developed a wide variety of packages that can help you save time and avoid writing repetitive code. Use packages like dplyr, tidyr, and ggplot2 to streamline your data manipulation and visualization tasks.
+
+5.  *Reproducibility:* Reproducibility is essential for data science and business intelligence. When using R, make sure that your code is reproducible by using Rmarkdown to create reproducible reports.
+
+6.  *Keep up-to-date:* The R community is constantly updating and improving R and its packages. Make sure to keep your packages up-to-date by running update.packages() in your R console.
+
+By following these best practices, you can make your R and Rmarkdown code more efficient, reproducible, and collaborative.
+
+## Conclusion
+
+In conclusion, R is a powerful tool for business intelligence that allows users to analyze data, create visualizations, and generate reports with ease. With a wide range of packages and functions available, R provides a flexible and efficient environment for BI professionals to work with their data. In this guide, we covered the basics of R, data manipulation, data visualization, dashboards, mapping, and reporting. We also provided some best practices for using R and Rmarkdown in BI projects. With the knowledge gained from this guide, you can start to use R for your own business intelligence needs and take your analysis and reporting to the next level.
+
+## References
+
+In this section, we'll provide a list of resources for further learning, including books, online courses, and websites, to help readers continue their learning journey in R and Rmarkdown for business intelligence.
+
+R - The R Project for Statistical Computing: <https://www.r-project.org/>
+
+RStudio - Integrated Development Environment (IDE) for R: <https://rstudio.com/>
+
+RMarkdown Cheat Sheet: <https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf>
+
+DataCamp - Data Manipulation with dplyr in R Cheat Sheet: <https://www.datacamp.com/community/blog/data-manipulation-with-dplyr-cheat-sheet>
+
+ggplot2 - Data Visualization with ggplot2 Cheat Sheet: <https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf>
+
+flexdashboard - Easy interactive dashboards for R: <https://rmarkdown.rstudio.com/flexdashboard/>
+
+Shiny - Web Application Framework for R: <https://shiny.rstudio.com/>
+
+plotly - R interface to plotly.js: <https://plotly.com/r/>
+
+leaflet - Interactive Maps in R: <https://rstudio.github.io/leaflet/>
+
+Best Practices for Writing R Code: <https://swcarpentry.github.io/r-novice-inflammation/02-best-practices-R/>
+
+R Markdown: The Definitive Guide: <https://bookdown.org/yihui/rmarkdown/>
+
+R Markdown Reference Guide: <https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf>
+
+### Contribute
+github - 
